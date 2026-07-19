@@ -1,0 +1,64 @@
+server:
+  port: ${SERVER_PORT:8080}
+  error:
+    include-stacktrace: never
+    include-message: never
+    include-binding-errors: never
+    include-exception: false
+
+spring:
+  application:
+    name: prompt-portal-api
+  data:
+    mongodb:
+      uri: ${MONGODB_URI:mongodb://localhost:27017/promptportal}
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 12MB
+# OAuth client registrations live in application-oauth.yml (profile: oauth).
+# Without that profile, use dev header auth (APP_DEV_MODE=true).
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: when_authorized
+
+app:
+  security:
+    # When true (default if OAuth client ids empty): accept X-Dev-User-Email header / session for local MVP
+    dev-mode: ${APP_DEV_MODE:true}
+    allowed-emails: ${ALLOWED_EMAILS:}
+    auth-secret: ${AUTH_SECRET:change-me-in-production}
+  storage:
+    upload-dir: ${UPLOAD_DIR:../data/uploads}
+    max-upload-bytes: ${MAX_UPLOAD_BYTES:2097152}
+    quota-bytes: ${QUOTA_BYTES:52428800}
+  frontend-url: ${APP_URL:http://localhost:3000}
+  logging:
+    level: ${LOG_LEVEL:INFO}
+    dir: ${LOG_DIR:../logs}
+  perf:
+    slow-ms: ${PERF_SLOW_MS:2000}
+  retention:
+    enabled: ${RETENTION_ENABLED:true}
+    days: ${RETENTION_DAYS:730}
+    cron: ${RETENTION_CRON:0 30 3 * * *}
+
+logging:
+  config: classpath:logback-spring.xml
+
+---
+# Activate with: --spring.profiles.active=dev
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+app:
+  security:
+    dev-mode: true

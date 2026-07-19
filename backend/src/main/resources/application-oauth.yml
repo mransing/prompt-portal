@@ -1,0 +1,28 @@
+# Activate with: --spring.profiles.active=oauth
+# or SPRING_PROFILES_ACTIVE=oauth,dev
+# Requires AUTH_GOOGLE_ID / AUTH_GOOGLE_SECRET and/or Facebook equivalents.
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${AUTH_GOOGLE_ID}
+            client-secret: ${AUTH_GOOGLE_SECRET}
+            scope: openid, profile, email
+          facebook:
+            client-id: ${AUTH_FACEBOOK_ID:unused}
+            client-secret: ${AUTH_FACEBOOK_SECRET:unused}
+            scope: public_profile, email
+            provider: facebook
+        provider:
+          facebook:
+            authorization-uri: https://www.facebook.com/v18.0/dialog/oauth
+            token-uri: https://graph.facebook.com/v18.0/oauth/access_token
+            user-info-uri: https://graph.facebook.com/me?fields=id,name,email,picture
+            user-name-attribute: id
+
+app:
+  security:
+    dev-mode: ${APP_DEV_MODE:false}

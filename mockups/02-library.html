@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Library — Prompt Portal</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand"><div class="brand-mark">P</div> Prompt Portal</div>
+      <nav class="nav">
+        <a class="active" href="#">Library</a>
+        <a href="#">Settings</a>
+      </nav>
+      <div class="user-chip"><div class="avatar">A</div> you@gmail.com</div>
+    </header>
+    <main class="main">
+      <div class="page-header">
+        <div>
+          <h1>Prompt library</h1>
+          <p>Search and open prompts. Images always belong to the prompt that created them.</p>
+        </div>
+        <button class="btn btn-primary">+ New prompt</button>
+      </div>
+      <div class="toolbar">
+        <div class="search">Search titles, tags, prompt text…</div>
+        <select class="select"><option>Status: All</option></select>
+        <select class="select"><option>Type: All</option></select>
+        <select class="select"><option>Has media: Any</option></select>
+        <div class="quota">
+          <div class="quota-label"><span>Storage</span><span>36 / 50 MB</span></div>
+          <div class="quota-bar"><div class="quota-fill"></div></div>
+        </div>
+      </div>
+      <div class="grid">
+        <div class="card">
+          <div class="card-thumb"><span class="badge">3 images</span> Hero product shot</div>
+          <div class="card-body">
+            <h3>Launch hero — studio light</h3>
+            <div class="meta">
+              <span class="tag">image</span>
+              <span>v4</span>
+              <span>Updated 2d ago</span>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-thumb no-media"><span class="badge draft">draft</span> Text only</div>
+          <div class="card-body">
+            <h3>Cinematic trailer beat (video tag)</h3>
+            <div class="meta">
+              <span class="tag video">video</span>
+              <span>v2</span>
+              <span>No images yet</span>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-thumb"><span class="badge">1 image</span> Portrait</div>
+          <div class="card-body">
+            <h3>Character turnaround — soft light</h3>
+            <div class="meta">
+              <span class="tag">image</span>
+              <span>v7</span>
+              <span>Updated today</span>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-thumb"><span class="badge">5 images</span> Variations</div>
+          <div class="card-body">
+            <h3>Neon street market</h3>
+            <div class="meta">
+              <span class="tag">image</span>
+              <span class="tag">cyberpunk</span>
+              <span>v3</span>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-thumb no-media">Text only</div>
+          <div class="card-body">
+            <h3>Logo mark — minimal line</h3>
+            <div class="meta">
+              <span class="tag">text-only</span>
+              <span>v1</span>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-thumb"><span class="badge">2 images</span></div>
+          <div class="card-body">
+            <h3>Food pack flat lay</h3>
+            <div class="meta">
+              <span class="tag">image</span>
+              <span class="tag archive">archived</span>
+              <span>v5</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

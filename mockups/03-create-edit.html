@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Create / Edit — Prompt Portal</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand"><div class="brand-mark">P</div> Prompt Portal</div>
+      <nav class="nav">
+        <a href="#">Library</a>
+        <a class="active" href="#">Edit prompt</a>
+        <a href="#">Settings</a>
+      </nav>
+      <div class="user-chip"><div class="avatar">A</div> you@gmail.com</div>
+    </header>
+    <main class="main">
+      <div class="page-header">
+        <div>
+          <h1>Edit prompt</h1>
+          <p>Save updates text versions automatically. Images are not versioned — they belong to this prompt.</p>
+        </div>
+        <div class="inline-actions">
+          <button class="btn btn-ghost">Cancel</button>
+          <button class="btn btn-secondary">Save as draft</button>
+          <button class="btn btn-primary">Save</button>
+        </div>
+      </div>
+      <div class="layout-2">
+        <div class="panel">
+          <h2>Prompt text</h2>
+          <div class="field">
+            <label>Title</label>
+            <div class="input">Launch hero — studio light</div>
+          </div>
+          <div class="row-2">
+            <div class="field">
+              <label>Status</label>
+              <div class="select">active</div>
+            </div>
+            <div class="field">
+              <label>Media type focus</label>
+              <div class="select">image</div>
+            </div>
+          </div>
+          <div class="field">
+            <label>Tags</label>
+            <div class="chips">
+              <span class="chip">product</span>
+              <span class="chip">studio</span>
+              <span class="chip">+ add</span>
+            </div>
+          </div>
+          <div class="field">
+            <label>Prompt body (versioned on Save)</label>
+            <div class="textarea">A premium product hero shot of a matte black wireless speaker on a seamless soft-grey backdrop, three-point studio lighting, subtle reflection on the surface, shallow depth of field, commercial photography, 85mm lens</div>
+          </div>
+          <div class="field">
+            <label>Negative prompt (optional)</label>
+            <div class="textarea" style="min-height:64px;">blurry, watermark, text, harsh shadows, distorted product</div>
+          </div>
+          <div class="field">
+            <label>Parameters (optional JSON)</label>
+            <div class="textarea" style="min-height:56px;">{"model":"flux","aspect":"4:3","seed":48291}</div>
+          </div>
+        </div>
+        <div class="panel">
+          <h2>Result images (owned by this prompt)</h2>
+          <p class="muted" style="margin-bottom:10px;">Every image must belong to a prompt. One prompt can have many images. Max 2 MB each · 50 MB total.</p>
+          <div class="dropzone">
+            Drop images here or click to upload<br/>
+            <span class="muted">PNG, JPEG, WebP, GIF · created by this prompt</span>
+          </div>
+          <div class="thumb-row">
+            <div class="thumb"><span>output 1</span></div>
+            <div class="thumb" style="background:linear-gradient(135deg,#fde68a,#f9a8d4)"><span>output 2</span></div>
+            <div class="thumb" style="background:linear-gradient(135deg,#bbf7d0,#93c5fd)"><span>output 3</span></div>
+          </div>
+          <div class="quota" style="margin-top:16px;">
+            <div class="quota-label"><span>Your storage</span><span>36 / 50 MB (72%)</span></div>
+            <div class="quota-bar"><div class="quota-fill"></div></div>
+          </div>
+          <div class="actions">
+            <button class="btn btn-secondary">Save</button>
+          </div>
+          <p class="muted" style="margin-top:14px;">No separate Commit button. If prompt text changes on Save, version becomes v5 → v6.</p>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

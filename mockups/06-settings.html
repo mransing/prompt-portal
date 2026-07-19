@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Settings — Prompt Portal</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand"><div class="brand-mark">P</div> Prompt Portal</div>
+      <nav class="nav">
+        <a href="#">Library</a>
+        <a class="active" href="#">Settings</a>
+      </nav>
+      <div class="user-chip"><div class="avatar">A</div> you@gmail.com</div>
+    </header>
+    <main class="main">
+      <div class="page-header">
+        <div>
+          <h1>Settings</h1>
+          <p>Self-hosted single-user library · Google / Facebook sign-in only</p>
+        </div>
+        <button class="btn btn-danger">Sign out</button>
+      </div>
+      <div class="settings-grid">
+        <div class="panel">
+          <h2>Account</h2>
+          <p style="font-size:14px;margin-bottom:8px;"><strong>you@gmail.com</strong></p>
+          <p class="muted">Signed in with Google · Allowlisted owner</p>
+          <p class="muted" style="margin-top:12px;">Other authentication methods can be added in a later version.</p>
+        </div>
+        <div class="panel">
+          <h2>Image storage quota</h2>
+          <div class="stat">36 MB</div>
+          <p class="muted">of 50 MB used · max 2 MB per image</p>
+          <div class="quota" style="margin-top:14px;">
+            <div class="quota-label"><span>Usage</span><span>72%</span></div>
+            <div class="quota-bar"><div class="quota-fill"></div></div>
+          </div>
+          <p class="muted" style="margin-top:10px;">Warning appears at 90% (45 MB). Text prompts do not count toward quota.</p>
+        </div>
+        <div class="panel">
+          <h2>Retention</h2>
+          <p style="font-size:14px;line-height:1.5;">
+            Unmodified prompts and their images may be deleted after <strong>2 years</strong> without changes.
+          </p>
+          <p class="muted" style="margin-top:10px;">You are solely responsible for the content you store.</p>
+        </div>
+        <div class="panel">
+          <h2>About this portal</h2>
+          <ul class="muted" style="margin-left:18px;line-height:1.8;font-size:13px;">
+            <li>Every image belongs to the prompt that created it</li>
+            <li>One prompt can have many images</li>
+            <li>Prompt text is versioned (1, 2, 3…); media is not</li>
+            <li>No video file upload · video is a prompt tag only</li>
+            <li>No public share links · private self-hosted app</li>
+          </ul>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

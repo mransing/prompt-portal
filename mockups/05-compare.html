@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Compare versions — Prompt Portal</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand"><div class="brand-mark">P</div> Prompt Portal</div>
+      <nav class="nav">
+        <a href="#">Library</a>
+        <a class="active" href="#">Compare</a>
+        <a href="#">Settings</a>
+      </nav>
+      <div class="user-chip"><div class="avatar">A</div> you@gmail.com</div>
+    </header>
+    <main class="main">
+      <div class="page-header">
+        <div>
+          <h1>Compare versions</h1>
+          <p>Launch hero — studio light · text snapshots only (images are not versioned)</p>
+        </div>
+        <div class="inline-actions">
+          <select class="select"><option>Left: v2</option></select>
+          <select class="select"><option>Right: v4 (current)</option></select>
+          <button class="btn btn-secondary">Restore v2 as new version</button>
+          <button class="btn btn-ghost">Back to detail</button>
+        </div>
+      </div>
+      <div class="diff">
+        <div class="diff-col">
+          <header>Version 2</header>
+          <div class="diff-body">
+            A premium product shot of a black wireless speaker<br/>
+            on a grey backdrop,<br/>
+            <span class="del">soft lighting,</span><br/>
+            commercial photography
+          </div>
+        </div>
+        <div class="diff-col">
+          <header>Version 4 (current)</header>
+          <div class="diff-body">
+            A premium product <span class="add">hero</span> shot of a <span class="add">matte</span> black wireless speaker<br/>
+            on a <span class="add">seamless soft-</span>grey backdrop,<br/>
+            <span class="add">three-point studio lighting, subtle reflection on the surface, shallow depth of field,</span><br/>
+            commercial photography<span class="add">, 85mm lens</span>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

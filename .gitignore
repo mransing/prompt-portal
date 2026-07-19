@@ -1,0 +1,52 @@
+# Build
+**/target/
+**/node_modules/
+**/.next/
+**/out/
+**/dist/
+**/*.class
+**/*.jar
+!**/.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+**/.idea/
+**/*.iml
+**/.vscode/
+# Keep Eclipse metadata for backend only
+**/.classpath
+**/.project
+**/.settings/
+!backend/.project
+!backend/.classpath
+!backend/.settings/
+!backend/.settings/**
+
+# Env & secrets
+.env
+.env.local
+.env.*.local
+**/application-local.yml
+**/application-secrets.yml
+
+# Runtime data
+/data/uploads/**
+!/data/uploads/.gitkeep
+/logs/**
+!/logs/.gitkeep
+C:/prompt-portal-data/
+
+# OS
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Eclipse local
+**/.metadata/
+**/bin/
+
+# Maven
+**/dependency-reduced-pom.xml
+
+# Frontend
+frontend/next-env.d.ts
+frontend/tsconfig.tsbuildinfo
