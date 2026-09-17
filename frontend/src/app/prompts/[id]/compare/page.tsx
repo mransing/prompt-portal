@@ -49,7 +49,7 @@ export default function ComparePage() {
 
   const parts = useMemo(() => {
     if (!data) return [];
-    return Diff.diffLines(data.leftBody || "", data.rightBody || "");
+    return Diff.diffWords(data.leftBody || "", data.rightBody || "");
   }, [data]);
 
   return (

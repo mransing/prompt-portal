@@ -40,6 +40,17 @@ Project metadata included: `.project`, `.classpath`, `.settings/`, `prompt-porta
 
 ## Quick local run (not production deploy)
 
+**One command** (starts MongoDB if needed, then API + UI in separate windows):
+
+```powershell
+cd C:\Users\HomePC\Documents\prompt-portal
+.\deploy\windows\start-all.ps1
+```
+
+Stop API + UI: `.\deploy\windows\stop-all.ps1`
+
+**Or manually:**
+
 ```powershell
 # Terminal 0 — env + folders
 cd C:\Users\HomePC\Documents\prompt-portal
@@ -56,7 +67,7 @@ cd C:\Users\HomePC\Documents\prompt-portal
 - UI: http://localhost:3000  
 - Health: http://localhost:8080/actuator/health  
 
-Dev login: use the Login page email form (`X-Dev-User-Email`).
+Dev login: open http://localhost:3000, use **`dev@local.test`** on the Login page (already pre-filled). That email is sent as header `X-Dev-User-Email`. With `ALLOWED_EMAILS` empty, any email works.
 
 ## Build only
 

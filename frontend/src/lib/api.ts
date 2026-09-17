@@ -36,9 +36,22 @@ function headers(json = true): HeadersInit {
 async function parse<T>(res: Response): Promise<T> {
   if (res.status === 204) return undefined as T;
   const text = await res.text();
-  const data = text ? JSON.parse(text) : null;
+  let data: ApiError | T | null = null;
+  if (text) {
+    try {
+      data = JSON.parse(text);
+    } catch {
+      data = null;
+    }
+  }
   if (!res.ok) {
-    throw new ApiClientError(res.status, data || { code: "ERROR", message: res.statusText });
+    const err = (data || {}) as Partial<ApiError>;
+    throw new ApiClientError(res.status, {
+      code: err.code || "ERROR",
+      message: err.message || res.statusText || "Request failed",
+      correlationId: err.correlationId,
+      details: err.details,
+    });
   }
   return data as T;
 }

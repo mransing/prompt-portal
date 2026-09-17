@@ -59,7 +59,7 @@ public class AllowlistOAuth2UserService extends DefaultOAuth2UserService {
 
         String finalEmail = email;
         UserAccount account = users.findByProviderAndProviderId(provider, providerId)
-                .or(() -> users.findByEmailIgnoreCase(finalEmail))
+                .or(() -> users.findAllByEmailIgnoreCase(finalEmail).stream().findFirst())
                 .orElseGet(UserAccount::new);
 
         account.setEmail(email);

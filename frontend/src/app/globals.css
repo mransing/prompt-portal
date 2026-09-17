@@ -232,14 +232,15 @@ textarea {
 .thumb {
   width: 100%;
   aspect-ratio: 1;
-  object-fit: cover;
+  object-fit: contain;
   border-radius: 8px;
   background: #0d1520;
   border: 1px solid var(--border);
 }
 
 .diff-add {
-  background: rgba(127, 217, 154, 0.15);
+  background: rgba(254, 200, 254, 1);
+  color: green;
 }
 
 .diff-del {

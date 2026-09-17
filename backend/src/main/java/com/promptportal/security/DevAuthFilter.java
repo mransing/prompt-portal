@@ -14,6 +14,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
@@ -44,31 +46,55 @@ public class DevAuthFilter extends OncePerRequestFilter {
                 && SecurityContextHolder.getContext().getAuthentication() == null) {
             String raw = request.getHeader(HEADER);
             if (raw != null && !raw.isBlank()) {
-                final String email = raw.trim().toLowerCase(Locale.ROOT);
-                Set<String> allowed = props.getSecurity().allowedEmailSet();
-                if (!allowed.isEmpty() && !allowed.contains(email)) {
-                    auditLogger.log("AUTH_ALLOWLIST_DENY", email, "user", "-", "denied");
-                    response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+                try {
+                    if (!authenticateDevUser(raw, response)) {
+                        return;
+                    }
+                } catch (Exception e) {
+                    response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
                     response.setContentType("application/json");
                     response.getWriter().write(
-                            "{\"code\":\"FORBIDDEN\",\"message\":\"Email is not allowlisted.\",\"correlationId\":null,\"details\":null}");
+                            "{\"code\":\"INTERNAL_ERROR\",\"message\":\"Login failed. Try again.\",\"correlationId\":null,\"details\":null}");
                     return;
                 }
-                UserAccount account = users.findByEmailIgnoreCase(email).orElseGet(() -> {
-                    UserAccount u = new UserAccount();
-                    u.setEmail(email);
-                    u.setName(email.split("@")[0]);
-                    u.setProvider("dev");
-                    u.setProviderId(email);
-                    u.setCreatedAt(Instant.now());
-                    return users.save(u);
-                });
-                AppUserPrincipal principal = new AppUserPrincipal(
-                        account.getId(), account.getEmail(), account.getName(), "dev", Map.of("email", email));
-                var auth = new UsernamePasswordAuthenticationToken(principal, null, principal.getAuthorities());
-                SecurityContextHolder.getContext().setAuthentication(auth);
             }
         }
         filterChain.doFilter(request, response);
+    }
+
+    /** @return false if the response was already written (deny / error) */
+    private boolean authenticateDevUser(String raw, HttpServletResponse response) throws IOException {
+        final String email = raw.trim().toLowerCase(Locale.ROOT);
+        Set<String> allowed = props.getSecurity().allowedEmailSet();
+        if (!allowed.isEmpty() && !allowed.contains(email)) {
+            auditLogger.log("AUTH_ALLOWLIST_DENY", email, "user", "-", "denied");
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            response.setContentType("application/json");
+            response.getWriter().write(
+                    "{\"code\":\"FORBIDDEN\",\"message\":\"Email is not allowlisted.\",\"correlationId\":null,\"details\":null}");
+            return false;
+        }
+
+        List<UserAccount> matches = users.findAllByEmailIgnoreCase(email);
+        UserAccount account;
+        if (matches.isEmpty()) {
+            UserAccount u = new UserAccount();
+            u.setEmail(email);
+            u.setName(email.split("@")[0]);
+            u.setProvider("dev");
+            u.setProviderId(email);
+            u.setCreatedAt(Instant.now());
+            account = users.save(u);
+        } else {
+            matches.sort(Comparator.comparing(
+                    UserAccount::getCreatedAt, Comparator.nullsLast(Comparator.naturalOrder())));
+            account = matches.get(0);
+        }
+
+        AppUserPrincipal principal = new AppUserPrincipal(
+                account.getId(), account.getEmail(), account.getName(), "dev", Map.of("email", email));
+        var auth = new UsernamePasswordAuthenticationToken(principal, null, principal.getAuthorities());
+        SecurityContextHolder.getContext().setAuthentication(auth);
+        return true;
     }
 }

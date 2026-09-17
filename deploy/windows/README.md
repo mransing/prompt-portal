@@ -29,6 +29,29 @@ cd C:\Users\HomePC\Documents\prompt-portal
 .\deploy\windows\build-all.ps1
 ```
 
+## Start everything (recommended)
+
+From the project root:
+
+```powershell
+cd C:\Users\HomePC\Documents\prompt-portal
+.\deploy\windows\start-all.ps1
+```
+
+This script:
+
+1. Loads sample env (`env.sample.ps1`) and creates upload/log folders  
+2. Starts the **MongoDB** Windows service if it is stopped  
+3. Opens a window for the **API** → http://localhost:8080  
+4. Waits for `/actuator/health`  
+5. Opens a window for the **frontend** → http://localhost:3000  
+
+Stop API + frontend (MongoDB is left running):
+
+```powershell
+.\deploy\windows\stop-all.ps1
+```
+
 ## Start (manual, two terminals)
 
 1. Ensure MongoDB is running  
@@ -40,10 +63,18 @@ cd C:\Users\HomePC\Documents\prompt-portal
 With `APP_DEV_MODE=true` (default without OAuth profile), the API accepts:
 
 ```http
-X-Dev-User-Email: you@example.com
+X-Dev-User-Email:  dev@local.test
 ```
 
-The frontend stores this in `localStorage` (login page / settings).
+**Test username / email:** `dev@local.test` (pre-filled on the Login page).  
+If `ALLOWED_EMAILS` is empty, any email is accepted. The frontend stores the value in `localStorage` (login page / settings).
+
+If `start-all.ps1` is blocked by execution policy:
+
+```powershell
+Set-ExecutionPolicy -Scope Process Bypass
+.\deploy\windows\start-all.ps1
+```
 
 ## OAuth (later)
 

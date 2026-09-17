@@ -1,8 +1,9 @@
 # Prompt Portal — Session Status
 
-**Last updated:** 2026-07-19  
-**Status:** **Repository created and committed.** Code is on disk. **Not deployed / not running as a service.**  
-**Paused for:** User review of code; resume later.
+**Last updated:** 2026-09-17  
+**Status:** Local stack running (Mongo + API + UI). Dev login works.  
+**Local start:** `deploy\windows\start-all.ps1` (Mongo + API + UI). Stop with `stop-all.ps1`.  
+**Dev login email:** `dev@local.test` (pre-filled on the Login page). Any email works while `ALLOWED_EMAILS` is empty.
 
 ---
 
@@ -79,10 +80,12 @@ Without profile `oauth`, default is **dev mode** (`X-Dev-User-Email` / login pag
 - [x] Deploy scripts (build/start only)  
 - [x] Git init + initial commit  
 - [x] Backend build + frontend `npm install` verified  
+- [x] Fixed `dev@local.test` login: duplicate Mongo `users` rows made `findByEmailIgnoreCase` throw; filter now takes the oldest match and returns JSON on failure  
+- [x] Smoke test: API `/api/auth/me` with `X-Dev-User-Email:  dev@local.test` → 200; created prompt “Smoke test prompt” → 201  
 
 ## Not done yet
 
-- [ ] End-to-end smoke test (start API + UI, create prompt, upload image)  
+- [ ] Browser smoke test: open http://localhost:3000, log in, upload an image on the new prompt  
 - [ ] Real OAuth keys + `oauth` profile  
 - [ ] Windows Service / Task Scheduler for API + purge  
 - [ ] Production hardening (HTTPS, backups schedule, secrets store)  
@@ -105,6 +108,15 @@ Or:
 
 **Eclipse:** Import → Maven → Existing Maven Projects → `backend/`  
 Run `PromptPortalApplication` or `prompt-portal-api.launch`.
+
+**One-shot local run (recommended):**
+
+```powershell
+cd C:\Users\HomePC\Documents\prompt-portal
+.\deploy\windows\start-all.ps1
+# stop API + UI later:
+.\deploy\windows\stop-all.ps1
+```
 
 **Manual local run (not production deploy):**
 
